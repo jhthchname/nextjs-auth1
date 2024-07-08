@@ -18,7 +18,12 @@ export default function Home() {
     }
   }, [session, status, router]);
 
-  if (status === "loading") return <p>Loading...</p>;
+  if (status === "loading")
+    return (
+      <div className="flex justify-center items-center h-screen bg-gray-100">
+        <p className="text-4xl font-bold text-center">Loading...</p>
+      </div>
+    );
 
   return (
     <main>
