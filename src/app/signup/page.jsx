@@ -4,26 +4,29 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Signup() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [phone, setPhone] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+  });
   const router = useRouter();
+
+  const handleInput = (e) => {
+    const fieldName = e.target.name;
+    const fieldValue = e.target.value;
+
+    setFormData((prevState) => ({
+      ...prevState,
+      [fieldName]: fieldValue,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      firstName &&
-      lastName &&
-      email &&
-      password &&
-      confirmPassword &&
-      phone
-    ) {
-      router.push("/management?auth=signup");
-    }
+    router.push("/management?auth=signup");
   };
 
   return (
@@ -37,37 +40,49 @@ export default function Signup() {
           >
             <input
               type="text"
-              onChange={(e) => setFirstName(e.target.value)}
+              name="firstName"
+              onChange={handleInput}
+              value={formData.firstName}
               className="p-2 rounded-md border focus:outline-none focus:border-[#6e59e7] focus:ring-[#806aff] block w-full focus:ring-1"
               placeholder="First name"
             />
             <input
               type="text"
-              onChange={(e) => setLastName(e.target.value)}
+              name="lastName"
+              onChange={handleInput}
+              value={formData.lastName}
               className="p-2 rounded-md border focus:outline-none focus:border-[#6e59e7] focus:ring-[#806aff] block w-full focus:ring-1"
               placeholder="Last name"
             />
             <input
               type="email"
-              onChange={(e) => setEmail(e.target.value)}
+              name="email"
+              onChange={handleInput}
+              value={formData.email}
               className="p-2 rounded-md border focus:outline-none focus:border-[#6e59e7] focus:ring-[#806aff] block w-full focus:ring-1"
               placeholder="Email"
             />
             <input
               type="password"
-              onChange={(e) => setPassword(e.target.value)}
+              name="password"
+              onChange={handleInput}
+              value={formData.password}
               className="p-2 rounded-md border focus:outline-none focus:border-[#6e59e7] focus:ring-[#806aff] block w-full focus:ring-1"
               placeholder="Password"
             />
             <input
               type="password"
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              name="confirmPassword"
+              onChange={handleInput}
+              value={formData.confirmPassword}
               className="p-2 rounded-md border focus:outline-none focus:border-[#6e59e7] focus:ring-[#806aff] block w-full focus:ring-1"
               placeholder="Confirm password"
             />
             <input
               type="tel"
-              onChange={(e) => setPhone(e.target.value)}
+              name="phone"
+              onChange={handleInput}
+              value={formData.phone}
               className="p-2 rounded-md border focus:outline-none focus:border-[#6e59e7] focus:ring-[#806aff] block w-full focus:ring-1"
               placeholder="Phone number"
             />

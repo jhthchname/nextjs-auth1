@@ -5,7 +5,7 @@ import Link from "next/link";
 import NextLogo from "../../../public/next.svg";
 import Image from "next/image";
 
-function Navbar({ session }) {
+export default function Navbar({ session }) {
   return (
     <nav className="flex justify-between items-center shadow-md p-5">
       <div className="ml-20">
@@ -28,5 +28,3 @@ function Navbar({ session }) {
     </nav>
   );
 }
-
-export default Navbar;

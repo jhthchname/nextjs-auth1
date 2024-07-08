@@ -1,6 +1,7 @@
 "use client";
 
 import Container from "./components/Container";
+import Navbar from "./components/Navbar";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -29,7 +30,9 @@ export default function Home() {
 
   return (
     <main>
-      <Container></Container>
+      <Container>
+        <Navbar />
+      </Container>
     </main>
   );
 }
