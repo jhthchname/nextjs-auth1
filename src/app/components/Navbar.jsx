@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import NextLogo from "../../../public/next.svg";
 import Image from "next/image";
-import { signOut } from "next-auth/react";
 
 function Navbar({ session }) {
   return (

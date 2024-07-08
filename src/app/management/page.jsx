@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useCallback, useRef, useState } from "react";
+import React, { useEffect, useCallback, useRef } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Container from "../components/Container";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -67,7 +68,7 @@ export default function ManagementUser({ session }) {
 
   return (
     <Container>
-      <Navbar session={session} />
+      <Navbar />
       <Toaster
         position="top-center"
         toastOptions={{
@@ -75,7 +76,7 @@ export default function ManagementUser({ session }) {
         }}
       />
       <div className="container mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-6">User Management</h1>
+        <h1 className="text-2xl font-bold mb-6">User Management</h1>
         <div className="mb-4">
           <input
             type="text"
