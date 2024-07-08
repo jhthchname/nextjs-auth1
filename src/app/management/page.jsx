@@ -1,16 +1,23 @@
 "use client";
 
-import React, { useEffect, useCallback, useRef } from "react";
-import { useState } from "react";
-import Navbar from "../components/Navbar";
+import React, { useEffect, useCallback, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import Container from "../components/Container";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
-export default function ManagementUser({ session }) {
+const DynamicNavbar = dynamic(() => import("../components/Navbar"), {
+  ssr: false,
+});
+
+export default function ManagementUser() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const hasShownToastRef = useRef(false);
+
+  const { data: session } = useSession();
+  if (session) router.replace("welcome");
 
   const showToast = useCallback((message) => {
     if (!hasShownToastRef.current) {
@@ -68,7 +75,7 @@ export default function ManagementUser({ session }) {
 
   return (
     <Container>
-      <Navbar />
+      <DynamicNavbar session={session} />
       <Toaster
         position="top-center"
         toastOptions={{
