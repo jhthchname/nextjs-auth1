@@ -21,7 +21,9 @@ export default function Home() {
   if (status === "loading")
     return (
       <div className="flex justify-center items-center h-screen bg-gray-100">
-        <p className="text-4xl font-bold text-center">Loading...</p>
+        <p className="text-4xl font-bold text-center text-[#6e59e7]">
+          Loading...
+        </p>
       </div>
     );
 
