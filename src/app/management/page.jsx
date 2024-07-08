@@ -27,7 +27,6 @@ export default function ManagementUser({ session }) {
       showToast("Login success!");
     }
 
-    // ลบ query parameter
     if (authStatus) {
       router.replace("/management", undefined, { shallow: true });
     }
