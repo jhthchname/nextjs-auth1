@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useEffect, useCallback, useRef } from "react";
-import { useState } from "react";
+import React, { useEffect, useCallback, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import Container from "../components/Container";
 import { useRouter, useSearchParams } from "next/navigation";
