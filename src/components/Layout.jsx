@@ -1,13 +1,10 @@
-import React from "react";
 import Navbar from "./Navbar";
 
-function LayoutContainer({ children, user }) {
+export default function Layout({ children, user, showNavbar }) {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar user={user} />
-      {children}
-    </div>
+    <>
+      {showNavbar && <Navbar user={user} />}
+      <main>{children}</main>
+    </>
   );
 }
-
-export default LayoutContainer;

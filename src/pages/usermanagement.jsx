@@ -1,34 +1,13 @@
 "use client";
 
-import React, { useEffect, useState, Suspense } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
 import ModalEdit from "../components/Modal";
-import { ManageToast } from "@/components/common";
-import { Toaster } from "react-hot-toast";
 
-function ManagementUserContent() {
+export default function ManagementUserContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { showToast } = ManageToast();
-
-  useEffect(() => {
-    const authStatus = searchParams.get("auth");
-    const newUser = searchParams.get("newUser");
-    if (authStatus === "signup") {
-      showToast("Sign up success!");
-    } else if (authStatus === "login") {
-      showToast("Login success!");
-    }
-
-    if (newUser) {
-      const parsedUser = JSON.parse(newUser);
-      setUsers((prevUsers) => [...prevUsers, parsedUser]);
-    }
-
-    if (authStatus) {
-      router.replace("/usermanagement", undefined, { shallow: true });
-    }
-  }, [searchParams, router, showToast]);
 
   const [users, setUsers] = useState([
     {
@@ -55,6 +34,13 @@ function ManagementUserContent() {
   ]);
 
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    const signupSuccess = searchParams.get("signup");
+    if (signupSuccess === "success") {
+      toast.success("Sign up successful!");
+    }
+  }, [searchParams]);
 
   const filteredUsers = users.filter(
     (user) =>
@@ -111,13 +97,5 @@ function ManagementUserContent() {
         </div>
       </div>
     </div>
-  );
-}
-
-export default function ManagementUser({ session }) {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ManagementUserContent session={session} />
-    </Suspense>
   );
 }

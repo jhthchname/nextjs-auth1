@@ -39,7 +39,7 @@ export default function Login() {
           }
         );
         if (result?.data?._id) {
-          return router.push("/");
+          return router.push("/?auth=signin");
         } else {
           setError(
             "Login failed. Please check your credentials and try again."
@@ -48,17 +48,11 @@ export default function Login() {
       } catch (error) {
         console.error("Login error", error);
         if (error.response) {
-          console.error("Error data:", error.response.data);
-          console.error("Error status:", error.response.status);
-          console.error("Error headers:", error.response.headers);
           setError(
             `Server error: ${
               error.response.data.message || error.response.statusText
             }`
           );
-        } else if (error.request) {
-          console.error("Error request:", error.request);
-          setError("No response received from server. Please try again.");
         } else {
           console.error("Error message:", error.message);
           setError("An error occurred. Please try again.");

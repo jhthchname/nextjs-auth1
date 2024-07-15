@@ -16,7 +16,8 @@ userRoute
     })
     .post("/create", async (req, res) => {
         try {
-            await verifyToken(req?.headers?.authorization)
+            console.log('req?.body=========>', req?.body)
+            // await verifyToken(req?.headers?.authorization)
             let result = await userController.create(req?.body)
             res.status(200).json(result)
         } catch (error) {

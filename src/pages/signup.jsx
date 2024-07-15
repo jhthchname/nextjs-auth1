@@ -3,6 +3,23 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
+async function signUp(userData) {
+  const response = await fetch("/api/user/create", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(errorData.message || "Sign up failed");
+  }
+
+  return response.json();
+}
+
 export default function Signup() {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -36,7 +53,6 @@ export default function Signup() {
       !formData.lastName ||
       !formData.email ||
       !formData.password ||
-      !formData.confirmPassword ||
       !formData.phone
     ) {
       setError("Please fill out all required fields!");
@@ -44,12 +60,13 @@ export default function Signup() {
     }
 
     try {
-      return router.push("/usermanagement?auth=signup");
+      const result = await signUp(formData);
+
+      localStorage.setItem("token", result.token);
+      router.push("/usermanagement?signup=success");
     } catch (error) {
       console.error("Signup error", error);
-      setError(
-        error.response?.data?.message || "An error occurred during signup"
-      );
+      setError(error.message || "An error occurred during signup");
     }
   };
 
@@ -115,13 +132,12 @@ export default function Signup() {
               className="p-2 rounded-md border focus:outline-none focus:border-[#6e59e7] focus:ring-[#806aff] block w-full focus:ring-1"
               placeholder="Phone number"
             />
-
             <button className="bg-[#6e59e7] text-white rounded-md py-2 active:bg-[#806aff]">
               Sign up
             </button>
           </form>
           <div className="mt-5 text-sm flex justify-center items-center ">
-            <a className="text-gray-700 ">Already have an account? </a>
+            <a className="text-gray-700 ">Already have an account?</a>
             <a
               href="/login"
               className="text-[#6e59e7] font-bold ml-2 hover:underline"

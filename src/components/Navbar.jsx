@@ -27,7 +27,7 @@ export default function Navbar({ user }) {
   };
 
   return (
-    <nav className="flex justify-between items-center shadow-md p-5">
+    <nav className="flex justify-between items-center shadow-md p-5 bg-white">
       <div className="ml-20">
         <Link href="/">
           <Image
@@ -40,15 +40,25 @@ export default function Navbar({ user }) {
       </div>
       <ul className="flex space-x-4">
         {user?._id ? (
-          <li>
-            <Link
-              href=""
-              className="text-[#6e59e7] mr-20 text-lg font-bold my-2"
-              onClick={_signOut}
-            >
-              Logout
-            </Link>
-          </li>
+          <>
+            <li>
+              <Link
+                href="/usermanagement"
+                className="text-[#6e59e7] mr-20 text-lg font-bold my-2"
+              >
+                User Management
+              </Link>
+            </li>
+            <li>
+              <Link
+                href=""
+                className="text-[#6e59e7] mr-10 text-lg font-bold my-2"
+                onClick={_signOut}
+              >
+                Logout
+              </Link>
+            </li>
+          </>
         ) : null}
       </ul>
     </nav>

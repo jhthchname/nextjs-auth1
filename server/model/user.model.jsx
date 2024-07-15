@@ -20,6 +20,9 @@ const UserSchema = new mongoose.Schema({
   lastName: {
     type: String,
   },
+  phone: {
+    type: String,
+  },
   createdOn: {
     type: Date,
     default: Date.now,
