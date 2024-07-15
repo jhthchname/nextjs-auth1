@@ -1,39 +1,32 @@
 "use client";
 
-import React, {
-  useEffect,
-  useCallback,
-  useRef,
-  useState,
-  Suspense,
-} from "react";
-import Navbar from "../components/Navbar";
-import Container from "../components/Container";
+import React, { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
+import ModalEdit from "../components/Modal";
+import { ManageToast } from "@/components/common";
+import { Toaster } from "react-hot-toast";
 
-function ManagementUserContent({ session }) {
+function ManagementUserContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const hasShownToastRef = useRef(false);
-
-  const showToast = useCallback((message) => {
-    if (!hasShownToastRef.current) {
-      toast.success(message);
-      hasShownToastRef.current = true;
-    }
-  }, []);
+  const { showToast } = ManageToast();
 
   useEffect(() => {
     const authStatus = searchParams.get("auth");
+    const newUser = searchParams.get("newUser");
     if (authStatus === "signup") {
       showToast("Sign up success!");
     } else if (authStatus === "login") {
       showToast("Login success!");
     }
 
+    if (newUser) {
+      const parsedUser = JSON.parse(newUser);
+      setUsers((prevUsers) => [...prevUsers, parsedUser]);
+    }
+
     if (authStatus) {
-      router.replace("/management", undefined, { shallow: true });
+      router.replace("/usermanagement", undefined, { shallow: true });
     }
   }, [searchParams, router, showToast]);
 
@@ -72,8 +65,7 @@ function ManagementUserContent({ session }) {
   );
 
   return (
-    <Container>
-      <Navbar session={session} />
+    <div>
       <Toaster
         position="top-center"
         toastOptions={{
@@ -99,6 +91,7 @@ function ManagementUserContent({ session }) {
                 <th className="border p-2">Last Name</th>
                 <th className="border p-2">Email</th>
                 <th className="border p-2">Phone number</th>
+                <th className="border p-2">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -108,18 +101,16 @@ function ManagementUserContent({ session }) {
                   <td className="border p-2">{user.lastName}</td>
                   <td className="border p-2">{user.email}</td>
                   <td className="border p-2">{user.phone}</td>
+                  <td className="border p-2">
+                    <ModalEdit />
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <div className="flex justify-end">
-          <button className="mt-4 bg-[#6e59e7] text-white px-4 py-2 rounded hover:bg-[#523fbc]">
-            Edit
-          </button>
-        </div>
       </div>
-    </Container>
+    </div>
   );
 }
 

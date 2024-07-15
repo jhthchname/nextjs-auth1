@@ -13,6 +13,7 @@ export default function Signup() {
     phone: "",
   });
   const router = useRouter();
+  const [error, setError] = useState("");
 
   const handleInput = (e) => {
     const fieldName = e.target.name;
@@ -24,9 +25,32 @@ export default function Signup() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    router.push("/management?auth=signup");
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords don't match");
+      return;
+    }
+    if (
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.email ||
+      !formData.password ||
+      !formData.confirmPassword ||
+      !formData.phone
+    ) {
+      setError("Please fill out all required fields!");
+      return;
+    }
+
+    try {
+      return router.push("/usermanagement?auth=signup");
+    } catch (error) {
+      console.error("Signup error", error);
+      setError(
+        error.response?.data?.message || "An error occurred during signup"
+      );
+    }
   };
 
   return (
@@ -38,6 +62,11 @@ export default function Signup() {
             onSubmit={handleSubmit}
             className="text-sm flex flex-col gap-4 mt-4 "
           >
+            {error && (
+              <p className="text-red-500 bg-red-100 rounded-md p-2 border-solid border-2 border-red-400">
+                {error}
+              </p>
+            )}
             <input
               type="text"
               name="firstName"
@@ -86,13 +115,17 @@ export default function Signup() {
               className="p-2 rounded-md border focus:outline-none focus:border-[#6e59e7] focus:ring-[#806aff] block w-full focus:ring-1"
               placeholder="Phone number"
             />
+
             <button className="bg-[#6e59e7] text-white rounded-md py-2 active:bg-[#806aff]">
               Sign up
             </button>
           </form>
           <div className="mt-5 text-sm flex justify-center items-center ">
             <a className="text-gray-700 ">Already have an account? </a>
-            <a href="/login" className="text-[#6e59e7] font-bold ml-2">
+            <a
+              href="/login"
+              className="text-[#6e59e7] font-bold ml-2 hover:underline"
+            >
               Log in
             </a>
           </div>
