@@ -102,7 +102,7 @@ export default function Login() {
             </button>
           </form>
           <div className="mt-5 text-sm flex justify-center items-center">
-            <p className="text-gray-700 ">Don't have an account?</p>
+            <p className="text-gray-700 ">Don&apost have an account?</p>
             <a
               href="/signup"
               className="text-[#6e59e7] font-bold ml-2 hover:underline"
