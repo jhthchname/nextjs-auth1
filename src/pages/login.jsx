@@ -26,6 +26,10 @@ export default function Login() {
     e.preventDefault();
     setError("");
     const { email, password } = formData;
+    if (!formData.email || !formData.password) {
+      setError("Please fill out all required fields!");
+      return;
+    }
     if (email && password) {
       try {
         const result = await axios.post(

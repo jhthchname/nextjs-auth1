@@ -31,10 +31,10 @@ export default function Navbar({ user }) {
       <div className="ml-20">
         <Link href="/">
           <Image
-            src="../public/next.svg"
+            src="../public/jhinthicha.svg"
             width={100}
             height={100}
-            alt="nextjs logo"
+            alt="logo"
           />
         </Link>
       </div>
@@ -43,8 +43,24 @@ export default function Navbar({ user }) {
           <>
             <li>
               <Link
+                href="/report"
+                className="text-[#6e59e7] text-lg font-normal my-2"
+              >
+                Report
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/report"
+                className="text-[#6e59e7] text-lg font-normal my-2"
+              >
+                Request Information
+              </Link>
+            </li>
+            <li>
+              <Link
                 href="/usermanagement"
-                className="text-[#6e59e7] mr-20 text-lg font-bold my-2"
+                className="text-[#6e59e7] mr-10 text-lg font-normal my-2"
               >
                 User Management
               </Link>
@@ -52,7 +68,7 @@ export default function Navbar({ user }) {
             <li>
               <Link
                 href=""
-                className="text-[#6e59e7] mr-10 text-lg font-bold my-2"
+                className="bg-[#6e59e7] text-white px-3 py-1 mr-10 text-lg font-normal my-2 rounded-lg"
                 onClick={_signOut}
               >
                 Logout

@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import ModalEdit from "../components/Modal";
 
-export default function ManagementUserContent() {
+function ManagementUserContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -99,3 +99,5 @@ export default function ManagementUserContent() {
     </div>
   );
 }
+
+module.exports = ManagementUserContent;
