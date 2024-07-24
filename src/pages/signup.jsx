@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 async function signUp(userData) {
   const response = await fetch("/api/user/create", {
@@ -138,12 +139,12 @@ export default function Signup() {
           </form>
           <div className="mt-5 text-sm flex justify-center items-center ">
             <a className="text-gray-700 ">Already have an account?</a>
-            <a
+            <Link
               href="/login"
               className="text-[#6e59e7] font-bold ml-2 hover:underline"
             >
               Log in
-            </a>
+            </Link>
           </div>
         </div>
       </div>

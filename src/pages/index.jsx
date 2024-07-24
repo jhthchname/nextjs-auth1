@@ -38,7 +38,7 @@ export default function Home(props) {
     }
 
     _queryData();
-  }, [searchParams]);
+  }, [_queryData, router, showToast]);
 
   const _queryData = async () => {
     try {

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import axios from "axios";
 
 export default function Login() {
@@ -106,13 +107,13 @@ export default function Login() {
             </button>
           </form>
           <div className="mt-5 text-sm flex justify-center items-center">
-            <a className="text-gray-700 ">Don't have an account?</a>
-            <a
+            <a className="text-gray-700 ">Don&apos;t have an account?</a>
+            <Link
               href="/signup"
               className="text-[#6e59e7] font-bold ml-2 hover:underline"
             >
               Sign up
-            </a>
+            </Link>
           </div>
         </div>
       </div>
