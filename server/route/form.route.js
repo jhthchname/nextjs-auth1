@@ -14,15 +14,14 @@ form
       res.status(400).json({ message: error?.message });
     }
   })
-  //   .get("/:id", async (req, res) => {
-  //     try {
-  //       console.log("req id========>", req.params);
-  //       let newUser = await userController.user(req.params);
-  //       res.status(200).json(newUser);
-  //     } catch (error) {
-  //       res.status(400).json({ message: error?.message });
-  //     }
-  //   })
+  .get("/:id", async (req, res) => {
+    try {
+      let newUser = await formController.form(req.params);
+      res.status(200).json(newUser);
+    } catch (error) {
+      res.status(400).json({ message: error?.message });
+    }
+  })
   .post("/create", async (req, res) => {
     try {
       const user = await verifyToken(req?.headers?.authorization);

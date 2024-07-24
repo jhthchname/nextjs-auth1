@@ -1,14 +1,14 @@
 import express from "express";
-import formController from "../controller/form.controller.js";
+import typeFormController from "../controller/typeform.controller.js";
 import { verifyToken } from "../auth/auth.service.js";
 
-const form = express.Router();
+const typeForm = express.Router();
 
-form
+typeForm
   .get("/", async (req, res) => {
     try {
       await verifyToken(req?.headers?.authorization);
-      let newUser = await formController.forms(req.query);
+      let newUser = await typeFormController.typeForms(req.query);
       res.status(200).json(newUser);
     } catch (error) {
       res.status(400).json({ message: error?.message });
@@ -25,8 +25,9 @@ form
   //   })
   .post("/create", async (req, res) => {
     try {
+      console.log("req?.body=========>", req?.body);
       const user = await verifyToken(req?.headers?.authorization);
-      let result = await formController.create(req?.body, user);
+      let result = await typeFormController.create(req?.body, user);
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({ message: error?.message });
@@ -35,7 +36,7 @@ form
   .put("/update", async (req, res) => {
     try {
       const user = await verifyToken(req?.headers?.authorization);
-      let result = await formController.update(req?.body, user);
+      let result = await typeFormController.update(req?.body, user);
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({ message: error?.message });
@@ -44,11 +45,11 @@ form
   .delete("/:id", async (req, res) => {
     try {
       await verifyToken(req?.headers?.authorization);
-      let result = await formController.delete(req?.params);
+      let result = await typeFormController.delete(req?.params);
       res.status(200).json(result);
     } catch (error) {
       res.status(400).json({ message: error?.message });
     }
   });
 
-export default form;
+export default typeForm;

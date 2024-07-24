@@ -36,9 +36,6 @@ export default function RequestManagement(props) {
                   <th scope="col" className="py-3 px-6">
                     สถานะ
                   </th>
-                  <th scope="col" className="py-3 px-6">
-                    การดำเนินการ
-                  </th>
                 </tr>
               </thead>
             </table>
