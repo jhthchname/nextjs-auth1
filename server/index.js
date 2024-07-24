@@ -32,13 +32,13 @@ app
       )
       .use(express.json({ limit: "100mb" }))
       .use(express.urlencoded({ extended: true }))
-      .use(
-        cors({
-          credentials: true,
-          origin: true,
-          exposedHeaders: "*",
-        })
-      )
+      // .use(
+      //   cors({
+      //     credentials: true,
+      //     origin: true,
+      //     exposedHeaders: "*",
+      //   })
+      // )
       .use(cookieParser())
       .use(bodyParser.json())
       .use(passport.initialize())

@@ -3,23 +3,25 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import axios from "axios";
+import { fromJSON } from "postcss";
 
-async function signUp(userData) {
-  const response = await fetch("/api/user/create", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(userData),
-  });
+// async function signUp(userData) {
+//   const response = await fetch("/api/user/create", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(userData),
+//   });
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || "Sign up failed");
-  }
+//   if (!response.ok) {
+//     const errorData = await response.json();
+//     throw new Error(errorData.message || "Sign up failed");
+//   }
 
-  return response.json();
-}
+//   return response.json();
+// }
 
 export default function Signup() {
   const [formData, setFormData] = useState({
@@ -59,16 +61,27 @@ export default function Signup() {
       setError("Please fill out all required fields!");
       return;
     }
-
+    console.log('formData========>',formData)
     try {
-      const result = await signUp(formData);
-
-      localStorage.setItem("token", result.token);
-      router.push("/usermanagement?signup=success");
+      const response = await axios({
+        method: "POST",
+        url: "/api/user/create",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: JSON.stringify(formData),
+      });
+      console.log("response=========>", response);
+      // let result = response.json();
+      if(response?.data?._id) {
+        
+        router.push(`/signup-success/${response.data?._id}`);
+      }
     } catch (error) {
       console.error("Signup error", error);
-      setError(error.message || "An error occurred during signup");
+      setError(error?.message || "An error occurred during signup");
     }
+    return 
   };
 
   return (

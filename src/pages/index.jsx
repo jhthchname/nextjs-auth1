@@ -10,7 +10,7 @@ export async function getServerSideProps({ req }) {
   return await checkAuth(req);
 }
 
-export default function Home(props) {
+export default function RequestForm(props) {
   const router = useRouter();
   const defaultFilter = { query: "", skip: 0, limit: 10 };
   const [filter, setFilter] = useState(defaultFilter);

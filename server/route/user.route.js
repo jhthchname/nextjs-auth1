@@ -14,6 +14,15 @@ userRoute
             res.status(400).json({ message: error?.message })
         }
     })
+    .get("/:id", async (req, res) => {
+        try {
+            console.log('req id========>',req.params)
+            let newUser = await userController.user(req.params)
+            res.status(200).json(newUser)
+        } catch (error) {
+            res.status(400).json({ message: error?.message })
+        }
+    })
     .post("/create", async (req, res) => {
         try {
             console.log('req?.body=========>', req?.body)

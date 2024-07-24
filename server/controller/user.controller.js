@@ -48,6 +48,10 @@ const userController = {
         ])
         return user?.length > 0 ? user[0] : { total: 0, results: [] }
     },
+    user: async (args) => {
+        console.log('args=========>',args)
+        return await findUserById(args?.id)
+    },
     create: async (args) => {
         let user = await User.findOne({ email: args?.email })
         if(user) throw new Error("มีผู้ใช้งาน email นี้อยู่ในระบบอยู่แล้ว")
