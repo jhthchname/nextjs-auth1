@@ -5,6 +5,10 @@ import { setAuthCookie, verifyToken } from "../auth/auth.service.js";
 const authRoute = express.Router();
 
 authRoute
+  .all("*", (req, res, next) => {
+    console.log(`Received ${req.method} request for ${req.url}`);
+    next();
+  })
   .post("/signin", async (req, res) => {
     try {
       let result = await authController.signin(req.body);
