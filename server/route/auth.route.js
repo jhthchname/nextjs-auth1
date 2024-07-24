@@ -1,6 +1,6 @@
-const express = require("express");
-const authController = require("../controller/auth.controller.jsx");
-const { setAuthCookie, verifyToken } = require("../auth/auth.service.jsx");
+import express from "express";
+import authController from "../controller/auth.controller.js";
+import { setAuthCookie, verifyToken } from "../auth/auth.service.js";
 
 const authRoute = express.Router();
 
@@ -26,4 +26,4 @@ authRoute
     }
   });
 
-module.exports = authRoute;
+export default authRoute;

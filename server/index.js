@@ -1,17 +1,14 @@
-const express = require("express");
-const next = require("next");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const bodyParser = require("body-parser");
-const passport = require("passport");
-const session = require("express-session");
-const { v4 } = require("uuid");
-// api
-const baseRoute = require("./route/index.jsx");
-// env
-const { PORT, NODE_ENV, JWT_SECRET } = require("./common/settings.jsx");
-// connect db
-require("./common/db.jsx");
+import express from "express";
+import next from "next";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import bodyParser from "body-parser";
+import passport from "passport";
+import session from "express-session";
+import { v4 } from "uuid";
+import baseRoute from "./route/index.js";
+import { PORT, NODE_ENV, JWT_SECRET } from "./common/settings.js";
+import "./common/db.js";
 
 const dev = NODE_ENV !== "production";
 const app = next({ dev });

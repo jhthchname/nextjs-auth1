@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { MONGO_URL, MONGO_USER, MONGO_PASS } = require("./settings.jsx");
+import mongoose from "mongoose";
+import { MONGO_URL, MONGO_USER, MONGO_PASS } from "./settings.js";
 
 // help to debug mongoose
 if (process.env.NODE_ENV !== "test") {
@@ -26,4 +26,4 @@ mongoose
     console.error("Error connecting to database", err);
   });
 
-module.exports = mongoose;
+export default mongoose

@@ -1,47 +1,71 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Modal } from "antd";
-import { MdEdit } from "react-icons/md";
-import { MdDeleteForever } from "react-icons/md";
 
-const ModalEdit = () => {
+export default function ModalEdit({ user, onClose, onUpdate }) {
   const [loading, setLoading] = useState(false);
-  const [open, setOpen] = useState(false);
-  const showModal = () => {
-    setOpen(true);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+  });
+
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+      });
+    }
+  }, [user]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
-  const handleOk = () => {
+
+  const handleOk = async () => {
     setLoading(true);
-    setTimeout(() => {
+    try {
+      await onUpdate({ ...user, ...formData }); // Merge existing user data with form data
+    } catch (error) {
+      console.error("Update error", error);
+    } finally {
       setLoading(false);
-      setOpen(false);
-    }, 3000);
+      onClose();
+    }
   };
+
   const handleCancel = () => {
-    setOpen(false);
+    onClose();
   };
+
+  const handleReset = () => {
+    setFormData({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone,
+    });
+  };
+
   return (
     <>
-      <div className="flex justify-center space-x-2">
-        <Button
-          onClick={showModal}
-          className="bg-[#e6e1ff] px-3 py-2 rounded-sm hover:bg-[#cfc7ff]"
-        >
-          <MdEdit className="fill-[#6e59e7]" />
-        </Button>
-        <Button className="bg-[#ffdada] px-3 py-2 rounded-sm hover:bg-white">
-          <MdDeleteForever className="fill-[#fc4a4a]" />
-        </Button>
-      </div>
       <Modal
-        open={open}
+        open={true}
         title="Edit"
         centered
         onOk={handleOk}
         onCancel={handleCancel}
         className="sm:max-w-[425px]"
         footer={[
-          <Button key="back" onClick={handleCancel}>
-            Return
+          <Button key="reset" onClick={handleReset}>
+            Reset
           </Button>,
           <Button
             key="submit"
@@ -57,24 +81,32 @@ const ModalEdit = () => {
           <input
             type="text"
             name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
             className="p-2 rounded-md border focus:outline-none focus:border-[#6e59e7] focus:ring-[#806aff] block w-full focus:ring-1"
             placeholder="First name"
           />
           <input
             type="text"
             name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
             className="p-2 rounded-md border focus:outline-none focus:border-[#6e59e7] focus:ring-[#806aff] block w-full focus:ring-1"
             placeholder="Last name"
           />
           <input
             type="email"
             name="email"
+            value={formData.email}
+            onChange={handleChange}
             className="p-2 rounded-md border focus:outline-none focus:border-[#6e59e7] focus:ring-[#806aff] block w-full focus:ring-1"
             placeholder="Email"
           />
           <input
             type="tel"
             name="phone"
+            value={formData.phone}
+            onChange={handleChange}
             className="p-2 rounded-md border focus:outline-none focus:border-[#6e59e7] focus:ring-[#806aff] block w-full focus:ring-1"
             placeholder="Phone number"
           />
@@ -82,5 +114,4 @@ const ModalEdit = () => {
       </Modal>
     </>
   );
-};
-export default ModalEdit;
+}

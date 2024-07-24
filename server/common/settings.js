@@ -1,6 +1,6 @@
-const path = require("path");
-const fs = require("fs");
-const dotenv = require("dotenv");
+import path from "path";
+import fs from "fs";
+import dotenv from "dotenv";
 
 const env = process.env.NODE_ENV;
 const envFile = `.env.${env}`;
@@ -18,7 +18,7 @@ const MONGO_PASS = process.env.MONGO_PASS || "";
 const JWT_SECRET = process.env.JWT_SECRET || "";
 const SECRET_TOKEN = process.env.SECRET_TOKEN || "";
 
-module.exports = {
+export {
   PORT,
   NODE_ENV,
   MONGO_URL,

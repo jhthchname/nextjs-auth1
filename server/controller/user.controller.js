@@ -1,5 +1,5 @@
-const User = require("../model/user.model.jsx");
-const { hashedPassword } = require("../auth/auth.service.jsx");
+import User from "../model/user.model.js";
+import { hashedPassword } from "../auth/auth.service.js";
 
 const findUserById = async (id) => {
     let user = await User.findById(id)
@@ -73,4 +73,4 @@ const userController = {
     }
 }
 
-module.exports = userController
+export default userController

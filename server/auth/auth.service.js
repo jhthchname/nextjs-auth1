@@ -1,7 +1,7 @@
 
-const crypto = require("crypto")
-const User = require("../model/user.model.jsx")
-const { SECRET_TOKEN } = require("../common/settings.jsx")
+import crypto from "crypto"
+import User from "../model/user.model.js"
+import { SECRET_TOKEN } from "../common/settings.js"
 
 // Function to generate a random salt
 const generateSalt = () => {
@@ -71,4 +71,4 @@ const verifyToken = async(token) => {
 
 }
 
-module.exports = { hashedPassword, comparePasswords, setAuthCookie, generateToken, verifyToken }
+export { hashedPassword, comparePasswords, setAuthCookie, generateToken, verifyToken }

@@ -1,6 +1,6 @@
-const passport = require("passport");
-const User = require("../model/user.model.jsx");
-const setUp = require("../auth/passport/local.jsx");
+import passport from "passport";
+import User from "../model/user.model.js";
+import setUp from "../auth/passport/local.js";
 
 passport.serializeUser((user, done) => {
   done(null, user);
@@ -35,4 +35,4 @@ const authController = {
   },
 };
 
-module.exports = authController;
+export default authController;

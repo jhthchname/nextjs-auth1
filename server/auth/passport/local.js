@@ -1,6 +1,6 @@
-const passport = require('passport');
-const { Strategy } = require('passport-local');
-const { comparePasswords, generateToken } = require('../auth.service.jsx');
+import passport from 'passport';
+import { Strategy } from 'passport-local';
+import { comparePasswords, generateToken } from '../auth.service.js';
 
 
 const Authenticate = async (user, email, password, done) => {
@@ -53,4 +53,4 @@ const setUp = async (user) => {
     )
 }
 
-module.exports = setUp
+export default setUp

@@ -1,6 +1,6 @@
-const express = require("express")
-const { verifyToken } = require("../auth/auth.service.jsx")
-const userController = require("../controller/user.controller.jsx")
+import express from "express"
+import userController from "../controller/user.controller.js"
+import { verifyToken } from "../auth/auth.service.js"
 
 const userRoute = express.Router()
 
@@ -51,4 +51,4 @@ userRoute
         }
     })
 
-module.exports = userRoute
+export default userRoute
