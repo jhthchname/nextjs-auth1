@@ -55,10 +55,6 @@ const typeFormController = {
     ]);
     return typeForms?.length > 0 ? typeForms[0] : { total: 0, results: [] };
   },
-  // user: async (args) => {
-  //     console.log('args=========>',args)
-  //     return await findUserById(args?.id)
-  // },
   create: async (args, user) => {
     let typeForm = await TypeForm.findOne({ name: args?.name });
     if (typeForm) throw new Error("มีชื่อนี้อยู่ในระบบอยู่แล้ว");

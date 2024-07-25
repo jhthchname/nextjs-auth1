@@ -44,7 +44,7 @@ export default function Login() {
           }
         );
         if (result?.data?._id) {
-          return router.push("/?auth=signin");
+          return router.push("/?auth=login");
         } else {
           setError(
             "Login failed. Please check your credentials and try again."
